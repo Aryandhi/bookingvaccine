@@ -71,6 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         config.setAllowedOrigins(Arrays.asList("https://62cad42901f49e3c67309c3f--vaccinekel6.netlify.app"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
 
