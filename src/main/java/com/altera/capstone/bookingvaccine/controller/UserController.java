@@ -37,39 +37,6 @@ public class UserController {
   @Autowired
   UserRepository userRepository;
 
-//    @GetMapping("/login")
-//    public ResponseEntity<?> getLogin(Principal principal){
-//        return ResponseEntity.ok(principal.getName()+" Berhasil Login");
-//    }
-
-  // GET By ID User for GET Family
-//  @ApiOperation(value = "GET User by id for GET All Family",  response = UserDto.class)
-//  @ApiResponses(value = {
-//          @ApiResponse(code = 200, message = "Success GET User by id for GET All Family"),
-//  })
-//  @GetMapping(value = "/allMember/{id}")
-//  public ResponseEntity<Object> getByAllMemberId(@PathVariable(value = "id") Long id_user){
-//    return userService.getFamilyByUserId(id_user);
-//  }
-
-
-  // POST
-  @ApiOperation(value = "Register user",  response = UsernamePassword.class)
-  @ApiResponses(value = {
-          @ApiResponse(code = 200, message = "Success register user"),
-
-  })
-  @PostMapping("")
-  public ResponseEntity<?> register(@RequestBody UserDto req) {
-    if(req.getRoles() == null){
-      req.setRoles("USER");
-      userService.addUser(req);
-    } else {
-      userService.addUserAdmin(req);
-    }
-    return ResponseUtil.build(AppConstant.Message.SUCCESS, req, HttpStatus.OK);
-  }
-
   // - Get All User
   @ApiOperation(value = "Get all user",  response = UserDto.class)
   @ApiResponses(value = {
@@ -90,7 +57,7 @@ public class UserController {
     return userService.getUserById(id_user);
   }
 
-  // GET By User role admin
+  // GET User By role
   @ApiOperation(value = "Get By User role admin",  response = SessionDto.class)
   @ApiResponses(value = {
           @ApiResponse(code = 200, message = "Success By User role admin"),
@@ -101,26 +68,16 @@ public class UserController {
     return userService.getUserByRoles(roles);
   }
 
-//  // GET By User role user
-//  @ApiOperation(value = "Get By User role user",  response = SessionDto.class)
-//  @ApiResponses(value = {
-//          @ApiResponse(code = 200, message = "Success By User role user"),
-//
-//  })
-//  @GetMapping("/role/{user}")
-//  public ResponseEntity<Object> getUserRoleUser(@PathVariable("user") String roles){
-//    return userService.getUserByRoles(roles);
-//  }
 
   // PUT User By Id
-  @ApiOperation(value = "Update user",  response = UserDto.class)
-  @ApiResponses(value = {
-          @ApiResponse(code = 200, message = "Success update user"),
-  })
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Object> updateBook(@PathVariable(value = "id") Long id, @RequestBody UserDto request) {
-    return userService.updateUser(id, request);
-  }
+//  @ApiOperation(value = "Update user",  response = UserDto.class)
+//  @ApiResponses(value = {
+//          @ApiResponse(code = 200, message = "Success update user"),
+//  })
+//  @PutMapping(value = "/{id}")
+//  public ResponseEntity<Object> updateBook(@PathVariable(value = "id") Long id, @RequestBody UserDto request) {
+//    return userService.updateUser(id, request);
+//  }
 
   // DELETE User By Id
 //  @ApiOperation(value = "Delete user",  response = UserDto.class)
