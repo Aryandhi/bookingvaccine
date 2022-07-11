@@ -20,7 +20,7 @@ import java.util.Map;
 public class JwtTokenProvider {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    private Long expiration = 1000L * 60 * 60;
+    private Long expiration = 1000L * 60 * 1440;
 
     // nik_as_username as username
     public String generateToken(Authentication authentication) {
