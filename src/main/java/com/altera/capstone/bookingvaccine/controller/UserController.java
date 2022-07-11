@@ -70,14 +70,14 @@ public class UserController {
 
 
   // PUT User By Id
-//  @ApiOperation(value = "Update user",  response = UserDto.class)
-//  @ApiResponses(value = {
-//          @ApiResponse(code = 200, message = "Success update user"),
-//  })
-//  @PutMapping(value = "/{id}")
-//  public ResponseEntity<Object> updateBook(@PathVariable(value = "id") Long id, @RequestBody UserDto request) {
-//    return userService.updateUser(id, request);
-//  }
+  @ApiOperation(value = "Update user",  response = UserDto.class)
+  @ApiResponses(value = {
+          @ApiResponse(code = 200, message = "Success update user"),
+  })
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<Object> updateBook(@PathVariable(value = "id") Long id, @RequestBody UserDto request) {
+    return userService.updateUser(id, request);
+  }
 
   // DELETE User By Id
 //  @ApiOperation(value = "Delete user",  response = UserDto.class)
