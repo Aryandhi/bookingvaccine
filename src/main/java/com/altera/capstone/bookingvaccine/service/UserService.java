@@ -10,6 +10,9 @@ import com.altera.capstone.bookingvaccine.util.ResponseUtil;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -187,6 +190,24 @@ public class UserService implements UserDetailsService {
       log.trace("Get error when delete user. ", e);
       throw e;
     }
+  }
+
+  public ResponseEntity<Object> getUserByRolesPageable(String roles, int page, int size) {
+    try {
+
+      org.springframework.data.domain.Pageable pageable = PageRequest.of(page, size,
+              Sort.by("roles"));
+
+      Page<UserDao> paginationUserByRoles = userRepository.findAllByRoles(roles, pageable);
+
+      return ResponseUtil.build(AppConstant.Message.SUCCESS, paginationUserByRoles,
+              HttpStatus.OK);
+    } catch (Exception e) {
+      log.error("Happened error when Pagination user. Error: {}", e.getMessage());
+      log.trace("Get error when Pagination   user. ", e);
+      throw e;
+    }
+
   }
 
   @Override

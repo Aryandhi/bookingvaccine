@@ -34,10 +34,12 @@ public class SessionController {
       @ApiResponse(code = 200, message = "Success get list session"),
 
   })
-  @GetMapping(value = "/{page}/{size}")
-  public ResponseEntity<Object> getAll(@PathVariable(value = "page") int page,
-      @PathVariable(value = "size") int size) {
-    return sessionService.getAllSession(page, size);
+  @GetMapping(value = "/paging")
+  public ResponseEntity<Object> getAll(
+          @RequestParam(value = "page") int page,
+          @RequestParam(value = "size") int size) {
+
+    return sessionService.getAllSessionPagination(page, size);
   }
 
   // GET ALL
@@ -91,6 +93,7 @@ public class SessionController {
   })
   @PostMapping(value = "")
   public ResponseEntity<Object> addSession(@RequestParam(value = "vaccine_id") Long vaccine_id,
+
       @RequestParam(value = "area_id") Long area_id,
       @RequestParam(value = "health_facilities_id") Long health_facilities_id,
       @RequestParam(value = "stock") Integer stock,
@@ -100,6 +103,7 @@ public class SessionController {
 
     return sessionService.addSessionWithPhoto(vaccine_id, area_id, health_facilities_id, stock, start_date, start_time,
         multipartFile);
+
   }
 
   // PUT
