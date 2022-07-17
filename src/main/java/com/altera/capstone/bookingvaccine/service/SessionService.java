@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -53,12 +54,13 @@ public class SessionService {
   @Value("${booking-api.url}")
   private String apiUrl;
 
-  public ResponseEntity<Object> getAllSession(int page, int size) {
+  public ResponseEntity<Object> getAllSessionPagination(int page, int size) {
     log.info("Executing get all session.");
-    try{
-      Pageable paging = PageRequest.of(page, size);
+    try {
+      Pageable paging = PageRequest.of(page, size,
+              Sort.by("startDate").descending().and(Sort.by("startTime").descending()));
       Page<SessionDao> pageResult = sessionRepository.findAll(paging);
-      return ResponseUtil.build(AppConstant.Message.SUCCESS, pageResult.toList(), HttpStatus.OK);
+      return ResponseUtil.build(AppConstant.Message.SUCCESS, pageResult, HttpStatus.OK);
     } catch (Exception e) {
       log.error("Happened error when get all session. Error: {}", e.getMessage());
       log.trace("Get error when get all session. ", e);

@@ -28,17 +28,19 @@ public class SessionController {
   @Autowired
   private SessionService sessionService;
 
-//  Sort, fulltext search
+  // Sort, fulltext search
   // GET All with Pageable
-  @ApiOperation(value = "Get all session",  response = SessionDto.class)
+  @ApiOperation(value = "Get all session", response = SessionDto.class)
   @ApiResponses(value = {
           @ApiResponse(code = 200, message = "Success get list session"),
 
   })
-  @GetMapping(value = "/{page}/{size}")
-  public ResponseEntity<Object> getAll(@PathVariable(value = "page") int page,
-                                       @PathVariable(value = "size") int size) {
-    return sessionService.getAllSession(page, size);
+  @GetMapping(value = "/paging")
+  public ResponseEntity<Object> getAll(
+          @RequestParam(value = "page") int page,
+          @RequestParam(value = "size") int size) {
+
+    return sessionService.getAllSessionPagination(page, size);
   }
 
   // GET ALL
@@ -95,13 +97,12 @@ public class SessionController {
                                            @RequestParam(value = "area_id") Long area_id,
                                            @RequestParam(value = "health_facilities_id") Long health_facilities_id,
                                            @RequestParam(value = "stock") Integer stock,
-                                           @RequestParam(value = "start_date")
-                                             @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate start_date,
-                                           @RequestParam(value = "start_time")
-                                             @DateTimeFormat(pattern = "HH:mm") LocalTime start_time,
+                                           @RequestParam(value = "start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start_date,
+                                           @RequestParam(value = "start_time") @DateTimeFormat(pattern = "HH:mm") LocalTime start_time,
                                            @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
 
-    return sessionService.addSessionWithPhoto(vaccine_id, area_id, health_facilities_id, stock, start_date, start_time, multipartFile);
+    return sessionService.addSessionWithPhoto(vaccine_id, area_id, health_facilities_id, stock, start_date, start_time,
+            multipartFile);
   }
 
   // PUT

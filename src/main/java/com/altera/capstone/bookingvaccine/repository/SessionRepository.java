@@ -1,6 +1,8 @@
 package com.altera.capstone.bookingvaccine.repository;
 
-import com.altera.capstone.bookingvaccine.domain.dao.HealthFacilitiesDao;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.altera.capstone.bookingvaccine.domain.dao.SessionDao;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -11,7 +13,6 @@ import java.util.List;
 
 @Repository
 public interface SessionRepository extends PagingAndSortingRepository<SessionDao, Long> {
-//  @Query(value = "SELECT * FROM health_facilities u WHERE u.id_user = 1", nativeQuery = true)
   @Query(value = "SELECT * FROM session_vaccine s WHERE s.area_id = :area_id AND is_deleted = false", nativeQuery = true)
   List<SessionDao> getSessionByAreaId(@PathVariable("area_id")Long area_id);
 
