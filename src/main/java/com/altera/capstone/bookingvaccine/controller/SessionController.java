@@ -122,9 +122,9 @@ public class SessionController {
     return sessionService.updateSession(id, vaccine_id, stock, start_date, start_time, multipartFile);
   }
 
-  @ApiOperation(value = "Update session", response = SessionDto.class)
+  @ApiOperation(value = "Update session without set Image", response = SessionDto.class)
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Success Update session"),
+      @ApiResponse(code = 200, message = "Success Update session without set Image"),
 
   })
   @PutMapping(value = "/noImage/{id}")

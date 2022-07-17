@@ -155,7 +155,7 @@ public class NewsVaccineService {
         }
     }
 
-    public ResponseEntity<Object> updateNewsVaccinewsithPhoto(Long id,
+    public ResponseEntity<Object> updateNewsVaccinePhoto(Long id,
             String titleNewsVaccine,
             String authorNewsVaccine,
             String contentNewsVaccine,
@@ -187,6 +187,31 @@ public class NewsVaccineService {
                     res.setImage(apiUrl + "/images/" + filecode);
                     newsVaccineRepository.save(res);
                 }
+            });
+            log.info("Executing update news vaccine success");
+            return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Happened error when update news vaccine. Error: {}", e.getMessage());
+            log.trace("Get error when update news vaccine. ", e);
+            throw e;
+        }
+    }
+
+    public ResponseEntity<Object> updateNews(Long id, String titleNewsVaccine, String authorNewsVaccine, String contentNewsVaccine) {
+        log.info("Executing update news vaccine with request: {}", id);
+        try {
+            Optional<NewsVaccineDao> newsVaccineDao = newsVaccineRepository.findById(id);
+            if (newsVaccineDao.isEmpty()) {
+                log.info("news vaccine {} not found", id);
+                return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+            }
+
+            newsVaccineDao.ifPresent(res -> {
+                res.setTitleNewsVaccine(titleNewsVaccine);
+                res.setAuthorNewsVaccine(authorNewsVaccine);
+                res.setContentNewsVaccine(contentNewsVaccine);
+                newsVaccineRepository.save(res);
             });
             log.info("Executing update news vaccine success");
             return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class),

@@ -82,19 +82,33 @@ public class NewsVaccineController {
                 multipartFile);
     }
 
-    // PUT wit photo
+    // PUT with photo
+    @ApiOperation(value = "Update news vaccine with photo", response = NewsVaccineDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success update news vaccine with photo"),
+    })
+    @PutMapping(value = "/news-photo/{id}")
+    public ResponseEntity<Object> updateNews(@PathVariable(value = "id") Long id,
+            @RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
+            @RequestParam(value = "authorNewsVaccine") String authorNewsVaccine,
+            @RequestParam(value = "contentNewsVaccine") String contentNewsVaccine,
+            @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
+        return newsVaccineService.updateNewsVaccinePhoto(id, titleNewsVaccine, authorNewsVaccine,
+                contentNewsVaccine, multipartFile);
+    }
+
+    // PUT News
     @ApiOperation(value = "Update news vaccine with photo", response = NewsVaccineDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success update news vaccine with photo"),
     })
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateNews(@PathVariable(value = "id") Long id,
-            @RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
-            @RequestParam(value = "authorNewsVaccine") String authorNewsVaccine,
-            @RequestParam(value = "contentNewsVaccine") String contentNewsVaccine,
-            @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
-        return newsVaccineService.updateNewsVaccinewsithPhoto(id, titleNewsVaccine, authorNewsVaccine,
-                contentNewsVaccine, multipartFile);
+                                             @RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
+                                             @RequestParam(value = "authorNewsVaccine") String authorNewsVaccine,
+                                             @RequestParam(value = "contentNewsVaccine") String contentNewsVaccine) throws IOException {
+        return newsVaccineService.updateNews(id, titleNewsVaccine, authorNewsVaccine,
+                contentNewsVaccine);
     }
 
     // DELETE
