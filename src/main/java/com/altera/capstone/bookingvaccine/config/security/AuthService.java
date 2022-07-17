@@ -39,15 +39,6 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public void validateUsernameAsNIK(@RequestBody UserDao req) throws BadRequestException {
-        // validasi input username as NIK harus 13 digit
-        // if (req.getUsername().length() != 13)
-        // throw new BadRequestException("NIK kamu salah, mohon periksa kembali");
-        // validasi register harus angka
-        // if (!req.getUsername().matches("[0-9]*"))
-        // throw new BadRequestException("NIK harus berupa angka");
-    }
-
     public UserDao register(UsernamePassword req) {
         UserDao user = new UserDao();
 
