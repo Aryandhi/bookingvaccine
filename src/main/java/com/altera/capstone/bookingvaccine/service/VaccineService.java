@@ -25,9 +25,9 @@ public class VaccineService {
   @Autowired
   private ModelMapper mapper;
 
-  public ResponseEntity<Object> getAllVaccine(){
+  public ResponseEntity<Object> getAllVaccine() {
     log.info("Executing get all vaccine.");
-    try{
+    try {
       List<VaccineDao> daoList = vaccineRepository.findAll();
       return ResponseUtil.build(AppConstant.Message.SUCCESS, daoList, HttpStatus.OK);
     } catch (Exception e) {
@@ -37,11 +37,11 @@ public class VaccineService {
     }
   }
 
-  public ResponseEntity<Object> getByIdVaccine(Long id){
+  public ResponseEntity<Object> getByIdVaccine(Long id) {
     log.info("Executing get vaccine by id: {} ", id);
     try {
       Optional<VaccineDao> vaccineDao = vaccineRepository.findById(id);
-      if(vaccineDao.isEmpty()) {
+      if (vaccineDao.isEmpty()) {
         log.info("vaccine id: {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
@@ -54,9 +54,9 @@ public class VaccineService {
     }
   }
 
-  public ResponseEntity<Object> addVaccine(VaccineDto request){
+  public ResponseEntity<Object> addVaccine(VaccineDto request) {
     log.info("Executing add vaccine with request: {}", request);
-    try{
+    try {
       VaccineDao vaccineDao = mapper.map(request, VaccineDao.class);
       vaccineDao = vaccineRepository.save(vaccineDao);
       log.info("Executing add vaccine success");
@@ -69,17 +69,16 @@ public class VaccineService {
     }
   }
 
-  public ResponseEntity<Object> updateVaccine(Long id, VaccineDto request){
+  public ResponseEntity<Object> updateVaccine(Long id, VaccineDto request) {
     log.info("Executing update vaccine with request: {}", request);
     try {
       Optional<VaccineDao> vaccineDao = vaccineRepository.findById(id);
-      if(vaccineDao.isEmpty()) {
+      if (vaccineDao.isEmpty()) {
         log.info("vaccine {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
       vaccineDao.ifPresent(res -> {
         res.setVaccineName(request.getVaccineName());
-//        res.setStockVaccine(request.getStockVaccine());
         vaccineRepository.save(res);
       });
       log.info("Executing update vaccine success");
@@ -91,11 +90,11 @@ public class VaccineService {
     }
   }
 
-  public ResponseEntity<Object> deleteVaccine(Long id){
+  public ResponseEntity<Object> deleteVaccine(Long id) {
     log.info("Executing delete vaccine id: {}", id);
-    try{
+    try {
       Optional<VaccineDao> vaccineDao = vaccineRepository.findById(id);
-      if(vaccineDao.isEmpty()) {
+      if (vaccineDao.isEmpty()) {
         log.info("category {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }

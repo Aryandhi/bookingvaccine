@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AreaDto {
-  private static final long serialVersionUID = -6735953605516155759L;
 
   private Long id_area;
 

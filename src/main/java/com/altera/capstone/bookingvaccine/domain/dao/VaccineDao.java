@@ -33,10 +33,4 @@ public class VaccineDao extends BaseEntity {
     this.id_vaccine = id_vaccine;
   }
 
-  //  @Column(name = "stock_vaccine", nullable = false)
-//  private String stockVaccine;
-
-//  @JsonIgnore
-//  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "vaccineMapped")
-//  private List<SessionDao> sessionDaoList;
 }

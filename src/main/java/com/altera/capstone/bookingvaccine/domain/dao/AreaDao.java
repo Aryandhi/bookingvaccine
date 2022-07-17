@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,10 +26,6 @@ public class AreaDao extends BaseEntity {
 
   @Column(name = "area", nullable = false, unique = true)
   private String areaName;
-
-//  @JsonIgnore
-//  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "areaMapped")
-//  private List<SessionDao> sessionDaoList;
 
   @JsonIgnore
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "areaMapped")

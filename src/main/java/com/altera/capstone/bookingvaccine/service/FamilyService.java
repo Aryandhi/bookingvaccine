@@ -2,8 +2,6 @@ package com.altera.capstone.bookingvaccine.service;
 
 import com.altera.capstone.bookingvaccine.constant.AppConstant;
 import com.altera.capstone.bookingvaccine.domain.dao.FamilyDao;
-import com.altera.capstone.bookingvaccine.domain.dao.HealthFacilitiesDao;
-import com.altera.capstone.bookingvaccine.domain.dao.SessionDao;
 import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
 import com.altera.capstone.bookingvaccine.domain.dto.FamilyDto;
 import com.altera.capstone.bookingvaccine.domain.dto.FamilyDtoResponse;
@@ -39,7 +37,7 @@ public class FamilyService {
     log.info("Executing get Family by user id: {} ", id);
     try {
       List<FamilyDao> familyDaoList = familyRepository.findFamilyByUserId(id);
-      if(familyDaoList.isEmpty()) {
+      if (familyDaoList.isEmpty()) {
         log.info("Family id: {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, "Family not found", HttpStatus.BAD_REQUEST);
       }
@@ -52,31 +50,31 @@ public class FamilyService {
     }
   }
 
-  public ResponseEntity<Object> getAllFamily(){
+  public ResponseEntity<Object> getAllFamily() {
     log.info("Executing get All Family");
     try {
       List<FamilyDao> daoList = familyRepository.findAll();
       List<FamilyDtoResponse> list = new ArrayList<>();
-      for(FamilyDao dao : daoList) {
+      for (FamilyDao dao : daoList) {
         list.add(FamilyDtoResponse.builder()
-                .id_family(dao.getId_family())
-                .nik(dao.getNik())
-                .fullName(dao.getFullName())
-                .user(UserDao.builder()
-                        .id_user(dao.getUserMapped().getId_user())
-                        .username(dao.getUserMapped().getUsername())
-                        .firstName(dao.getUserMapped().getFirstName())
-                        .lastName(dao.getUserMapped().getLastName())
-                        .birthDate(dao.getUserMapped().getBirthDate())
-                        .gender(dao.getUserMapped().getGender())
-                        .email(dao.getUserMapped().getEmail())
-                        .noPhone(dao.getUserMapped().getNoPhone())
-                        .roles(dao.getUserMapped().getRoles())
-                        .build())
-                .build());
+            .id_family(dao.getId_family())
+            .nik(dao.getNik())
+            .fullName(dao.getFullName())
+            .user(UserDao.builder()
+                .id_user(dao.getUserMapped().getId_user())
+                .username(dao.getUserMapped().getUsername())
+                .firstName(dao.getUserMapped().getFirstName())
+                .lastName(dao.getUserMapped().getLastName())
+                .birthDate(dao.getUserMapped().getBirthDate())
+                .gender(dao.getUserMapped().getGender())
+                .email(dao.getUserMapped().getEmail())
+                .noPhone(dao.getUserMapped().getNoPhone())
+                .roles(dao.getUserMapped().getRoles())
+                .build())
+            .build());
       }
       return ResponseUtil.build(AppConstant.Message.SUCCESS, list, HttpStatus.OK);
-    }catch (Exception e){
+    } catch (Exception e) {
       log.error("Happened error when get all book. Error: {}", e.getMessage());
       log.trace("Get error when get all book. ", e);
       throw e;
@@ -101,15 +99,9 @@ public class FamilyService {
     }
   }
 
-//  public ResponseEntity<Object> getFamilyById(Long id) {return null}
-
-//  public ResponseEntity<Object> getFamilyByFullname(String fullName) {return null}
-
-//  public ResponseEntity<Object> getFamilyByUsername(String username){return null}
-
   public ResponseEntity<Object> addFamily(FamilyDto request) {
     log.info("Executing add family with request: {}", request);
-    try{
+    try {
       log.info("Get user by id: {}", request.getIdUser());
       Optional<UserDao> userDao = userRepository.findById(request.getIdUser());
       if (userDao.isEmpty()) {
@@ -125,14 +117,15 @@ public class FamilyService {
     } catch (Exception e) {
       log.error("Happened error when add book. Error: {}", e.getMessage());
       log.trace("Get error when add family. ", e);
-      throw e;   }
+      throw e;
+    }
   }
 
   public ResponseEntity<Object> updateFamily(Long id_family, FamilyDto request) {
     log.info("Executing update family with request: {}", request);
     try {
-      Optional<FamilyDao>familyDaoOptional= familyRepository.findById(id_family);
-      if(familyDaoOptional.isEmpty()) {
+      Optional<FamilyDao> familyDaoOptional = familyRepository.findById(id_family);
+      if (familyDaoOptional.isEmpty()) {
         log.info("Family {} not found", id_family);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
@@ -142,7 +135,8 @@ public class FamilyService {
         familyRepository.save(res);
       });
       log.info("Executing update family success");
-      return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(familyDaoOptional, FamilyDto.class), HttpStatus.OK);
+      return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(familyDaoOptional, FamilyDto.class),
+          HttpStatus.OK);
     } catch (Exception e) {
       log.error("Happened error when update family. Error: {}", e.getMessage());
       log.trace("Get error when update family. ", e);
@@ -152,9 +146,9 @@ public class FamilyService {
 
   public ResponseEntity<Object> deleteFamily(Long id_family) {
     log.info("Executing delete family id: {}", id_family);
-    try{
-      Optional<FamilyDao> familyDaoOptional =familyRepository.findById(id_family);
-      if(familyDaoOptional.isEmpty()) {
+    try {
+      Optional<FamilyDao> familyDaoOptional = familyRepository.findById(id_family);
+      if (familyDaoOptional.isEmpty()) {
         log.info("Family {} not found", id_family);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }

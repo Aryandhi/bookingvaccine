@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "health_facilities")
 @SQLDelete(sql = "UPDATE health_facilities SET is_deleted = true WHERE id_health_facilities = ?")
 @Where(clause = "is_deleted = false")
-public class HealthFacilitiesDao extends BaseEntity{
+public class HealthFacilitiesDao extends BaseEntity {
 
   private static final long serialVersionUID = -1266576651734156259L;
 

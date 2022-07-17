@@ -30,15 +30,10 @@ public class BookingDao extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "family_id")
-  private FamilyDao familyMapped ;
-
-//  @ManyToMany
-//  private Set<FamilyDao> familyDaoSet;
+  private FamilyDao familyMapped;
 
   @ManyToOne
   @JoinColumn(name = "session_id")
   private SessionDao sessionMapped;
-
-
 
 }

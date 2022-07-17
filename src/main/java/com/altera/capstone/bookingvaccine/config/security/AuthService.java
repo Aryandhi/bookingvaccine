@@ -5,7 +5,7 @@ import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
 import com.altera.capstone.bookingvaccine.domain.payload.TokenResponse;
 import com.altera.capstone.bookingvaccine.domain.payload.UsernamePassword;
 import com.altera.capstone.bookingvaccine.repository.UserRepository;
-import com.altera.capstone.bookingvaccine.util.BadRequestException;
+
 import com.altera.capstone.bookingvaccine.util.ResponseUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +21,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Log4j2
 @Service

@@ -50,6 +50,4 @@ public class FamilyDao extends BaseEntity {
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "familyMapped")
   private List<BookingDao> bookingDaoList;
 
-//  @ManyToMany
-//  private Set<BookingDao> bookingDaoSet;
 }

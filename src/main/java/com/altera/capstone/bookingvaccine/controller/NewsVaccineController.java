@@ -33,8 +33,8 @@ public class NewsVaccineController {
             @ApiResponse(code = 200, message = "Success get list news vaccine"),
     })
     @GetMapping(value = "/{page}/{size}")
-    public ResponseEntity<Object> getAllNews(@PathVariable (value = "page")int page,
-                                             @PathVariable(value = "size") int size) {
+    public ResponseEntity<Object> getAllNews(@PathVariable(value = "page") int page,
+            @PathVariable(value = "size") int size) {
         return newsVaccineService.getAllNewsVaccine(page, size);
     }
 
@@ -49,13 +49,13 @@ public class NewsVaccineController {
     }
 
     // GET By Like
-    @ApiOperation(value = "Get By LIKE News Vaccine",  response = SessionDto.class)
+    @ApiOperation(value = "Get By LIKE News Vaccine", response = SessionDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success get By LIKE News Vaccine"),
 
     })
     @GetMapping("/search/{search}")
-    public ResponseEntity<Object> getSearch(@PathVariable(value = "search") String search){
+    public ResponseEntity<Object> getSearch(@PathVariable(value = "search") String search) {
         return newsVaccineService.getNewsByLike(search);
     }
 
@@ -68,15 +68,6 @@ public class NewsVaccineController {
         return newsVaccineService.getNewsVaccineById(id);
     }
 
-//    @ApiOperation(value = "Add new news vaccine", response = NewsVaccineDto.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Success add new news vaccine"),
-//    })
-//    @PostMapping(value = "")
-//    public ResponseEntity<Object> addNews(@RequestBody NewsVaccineDto request) {
-//        return newsVaccineService.addNewsVaccine(request);
-//    }
-
     // POST News With Photo
     @ApiOperation(value = "Add new news vaccine with photo", response = NewsVaccineDto.class)
     @ApiResponses(value = {
@@ -84,22 +75,12 @@ public class NewsVaccineController {
     })
     @PostMapping(value = "")
     public ResponseEntity<Object> addNewsWithPhoto(@RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
-                                                   @RequestParam(value = "authorNewsVaccine")String authorNewsVaccine,
-                                                   @RequestParam(value = "contentNewsVaccine")String contentNewsVaccine,
-                                                   @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
-        return newsVaccineService.addNewsWithPhoto(titleNewsVaccine, authorNewsVaccine, contentNewsVaccine, multipartFile );
+            @RequestParam(value = "authorNewsVaccine") String authorNewsVaccine,
+            @RequestParam(value = "contentNewsVaccine") String contentNewsVaccine,
+            @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
+        return newsVaccineService.addNewsWithPhoto(titleNewsVaccine, authorNewsVaccine, contentNewsVaccine,
+                multipartFile);
     }
-
-    // PUT
-//    @ApiOperation(value = "Update news vaccine", response = NewsVaccineDto.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Success update news vaccine"),
-//    })
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity<Object> updateNews(@PathVariable(value = "id") Long id,
-//            @RequestBody NewsVaccineDto request) {
-//        return newsVaccineService.updateNewsVaccinewithPhoto(id, request);
-//    }
 
     // PUT wit photo
     @ApiOperation(value = "Update news vaccine with photo", response = NewsVaccineDto.class)
@@ -108,11 +89,12 @@ public class NewsVaccineController {
     })
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateNews(@PathVariable(value = "id") Long id,
-                                             @RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
-                                             @RequestParam(value = "authorNewsVaccine")String authorNewsVaccine,
-                                             @RequestParam(value = "contentNewsVaccine")String contentNewsVaccine,
-                                             @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
-        return newsVaccineService.updateNewsVaccinewsithPhoto(id, titleNewsVaccine, authorNewsVaccine, contentNewsVaccine, multipartFile );
+            @RequestParam(value = "titleNewsVaccine") String titleNewsVaccine,
+            @RequestParam(value = "authorNewsVaccine") String authorNewsVaccine,
+            @RequestParam(value = "contentNewsVaccine") String contentNewsVaccine,
+            @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
+        return newsVaccineService.updateNewsVaccinewsithPhoto(id, titleNewsVaccine, authorNewsVaccine,
+                contentNewsVaccine, multipartFile);
     }
 
     // DELETE

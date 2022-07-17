@@ -1,8 +1,5 @@
 package com.altera.capstone.bookingvaccine.domain.dto;
 
-import com.altera.capstone.bookingvaccine.domain.dao.AreaDao;
-import com.altera.capstone.bookingvaccine.domain.dao.CategoryFacilitiesDao;
-import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

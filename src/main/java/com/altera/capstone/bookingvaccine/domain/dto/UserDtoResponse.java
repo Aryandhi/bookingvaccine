@@ -1,11 +1,7 @@
 package com.altera.capstone.bookingvaccine.domain.dto;
 
-import com.altera.capstone.bookingvaccine.domain.dao.FamilyDao;
-import com.altera.capstone.bookingvaccine.domain.dao.HealthFacilitiesDao;
-import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -13,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -50,10 +45,6 @@ public class UserDtoResponse implements Serializable {
 
   private String roles;
 
-//  private String imageName;
-//  private String imageType;
   private String imageProfile;
 
-//  private FamilyDao family;
-//  private HealthFacilitiesDao healthFacilitiesDaoDtoResponse;
 }

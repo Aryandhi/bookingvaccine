@@ -13,11 +13,12 @@ import java.util.List;
 
 @Repository
 public interface SessionRepository extends PagingAndSortingRepository<SessionDao, Long> {
+
   @Query(value = "SELECT * FROM session_vaccine s WHERE s.area_id = :area_id AND is_deleted = false", nativeQuery = true)
-  List<SessionDao> getSessionByAreaId(@PathVariable("area_id")Long area_id);
+  List<SessionDao> getSessionByAreaId(@PathVariable("area_id") Long area_id);
 
   // searching with LIKE
   @Query("SELECT s FROM SessionDao s WHERE s.healthFacilitiesDaoMapped.healthFacilitiesName " +
-          "LIKE %?1% OR s.vaccineMapped.vaccineName LIKE %?2%")
+      "LIKE %?1% OR s.vaccineMapped.vaccineName LIKE %?2%")
   List<SessionDao> findByFacilityLike(String health_facility_name, String vaccine_name);
 }
