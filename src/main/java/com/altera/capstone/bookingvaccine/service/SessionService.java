@@ -52,7 +52,7 @@ public class SessionService {
     log.info("Executing get all session.");
     try {
       Pageable paging = PageRequest.of(page, size,
-              Sort.by("startDate").descending().and(Sort.by("startTime").descending()));
+          Sort.by("startDate").descending().and(Sort.by("startTime").descending()));
       Page<SessionDao> pageResult = sessionRepository.findAll(paging);
       return ResponseUtil.build(AppConstant.Message.SUCCESS, pageResult, HttpStatus.OK);
     } catch (Exception e) {
@@ -180,6 +180,35 @@ public class SessionService {
     } catch (Exception e) {
       log.error("Happened error when add session. Error: {}", e.getMessage());
       log.trace("Get error when add session. ", e);
+      throw e;
+    }
+  }
+
+  public ResponseEntity<Object> updateSessionWithoutImage(Long id, Long vaccine_id, Integer stock,
+      LocalDate start_date, LocalTime start_time) throws IOException {
+    log.info("Executing update session with request: {}");
+    try {
+      Optional<SessionDao> sessionDaoOptional = sessionRepository.findById(id);
+      if (sessionDaoOptional.isEmpty()) {
+        log.info("session {} not found", id);
+        return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+      }
+
+      sessionDaoOptional.ifPresent(res -> {
+        res.setVaccineMapped(new VaccineDao(vaccine_id)); // updated vaccine //buat kondisi dengan tenary
+        res.setStartDate(start_date);
+        res.setStartTime(start_time);
+        res.setStock(stock);
+        // res.setLastStock(request.getLastStock());
+        sessionRepository.save(res);
+      });
+
+      log.info("Executing update session success");
+      return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(sessionDaoOptional, SessionDto.class),
+          HttpStatus.OK);
+    } catch (Exception e) {
+      log.error("Happened error when update session. Error: {}", e.getMessage());
+      log.trace("Get error when update session. ", e);
       throw e;
     }
   }
