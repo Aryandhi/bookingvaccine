@@ -1,7 +1,6 @@
 package com.altera.capstone.bookingvaccine.config.security;
 
 import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
-import com.altera.capstone.bookingvaccine.domain.dto.UserDtoResponse;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

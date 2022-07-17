@@ -1,15 +1,11 @@
 package com.altera.capstone.bookingvaccine.service;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import com.altera.capstone.bookingvaccine.constant.AppConstant;
-import com.altera.capstone.bookingvaccine.domain.dao.SessionDao;
+
 import com.altera.capstone.bookingvaccine.util.FileUploadUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.altera.capstone.bookingvaccine.domain.dao.NewsVaccineDao;
 import com.altera.capstone.bookingvaccine.domain.dto.NewsVaccineDto;
-import com.altera.capstone.bookingvaccine.domain.dto.NewsVaccineDtoRespone;
+
 import com.altera.capstone.bookingvaccine.repository.NewsVaccineRepository;
 import com.altera.capstone.bookingvaccine.util.ResponseUtil;
 
@@ -46,7 +42,7 @@ public class NewsVaccineService {
     private String apiUrl;
 
     // GET ALL DATA NEW BY DESC (for Mobile App)
-    public List<NewsVaccineDao> getAllNewByDesc(){
+    public List<NewsVaccineDao> getAllNewByDesc() {
         log.info("Executing get all news vaccine By Desc");
         try {
             return (List<NewsVaccineDao>) newsVaccineRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
@@ -90,12 +86,12 @@ public class NewsVaccineService {
 
     }
 
-    public ResponseEntity<Object> getNewsByLike(String search){
+    public ResponseEntity<Object> getNewsByLike(String search) {
         try {
             log.info("Execute get data news");
             List<NewsVaccineDao> newsVaccineDaoList = newsVaccineRepository.findTitleNewsByLike(search);
             return ResponseUtil.build(AppConstant.Message.SUCCESS, newsVaccineDaoList, HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("Happened error when get news by like. Error: {}", e.getMessage());
             log.trace("Get error when get news by like. ", e);
             throw e;
@@ -119,12 +115,12 @@ public class NewsVaccineService {
     }
 
     public ResponseEntity<Object> addNewsWithPhoto(String titleNewsVaccine,
-                                                   String authorNewsVaccine,
-                                                   String contentNewsVaccine,
-                                                   MultipartFile multipartFile) throws IOException {
+            String authorNewsVaccine,
+            String contentNewsVaccine,
+            MultipartFile multipartFile) throws IOException {
         log.info("Executing add news & photo with request: {}");
         try {
-            if(multipartFile == null){
+            if (multipartFile == null) {
                 NewsVaccineDao newsVaccineDao = NewsVaccineDao.builder()
                         .titleNewsVaccine(titleNewsVaccine)
                         .authorNewsVaccine(authorNewsVaccine)
@@ -132,7 +128,8 @@ public class NewsVaccineService {
                         .build();
                 newsVaccineDao = newsVaccineRepository.save(newsVaccineDao);
                 log.info("Executing add news without photo success");
-                return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class), HttpStatus.OK);
+                return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class),
+                        HttpStatus.OK);
             }
 
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -149,8 +146,9 @@ public class NewsVaccineService {
                     .build();
             newsVaccineDao = newsVaccineRepository.save(newsVaccineDao);
             log.info("Executing add news with photo success");
-            return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class), HttpStatus.OK);
-        } catch (Exception e){
+            return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class),
+                    HttpStatus.OK);
+        } catch (Exception e) {
             log.error("Happened error when add news with photo. Error: {}", e.getMessage());
             log.trace("Get error when add news with photo. ", e);
             throw e;
@@ -158,10 +156,10 @@ public class NewsVaccineService {
     }
 
     public ResponseEntity<Object> updateNewsVaccinewsithPhoto(Long id,
-                                                             String titleNewsVaccine,
-                                                             String authorNewsVaccine,
-                                                             String contentNewsVaccine,
-                                                             MultipartFile multipartFile) throws IOException {
+            String titleNewsVaccine,
+            String authorNewsVaccine,
+            String contentNewsVaccine,
+            MultipartFile multipartFile) throws IOException {
         log.info("Executing update news vaccine with request: {}", id);
         try {
             Optional<NewsVaccineDao> newsVaccineDao = newsVaccineRepository.findById(id);
@@ -191,39 +189,14 @@ public class NewsVaccineService {
                 }
             });
             log.info("Executing update news vaccine success");
-            return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class), HttpStatus.OK);
+            return ResponseUtil.build(AppConstant.Message.SUCCESS, mapper.map(newsVaccineDao, NewsVaccineDto.class),
+                    HttpStatus.OK);
         } catch (Exception e) {
             log.error("Happened error when update news vaccine. Error: {}", e.getMessage());
             log.trace("Get error when update news vaccine. ", e);
             throw e;
         }
     }
-
-//    public ResponseEntity<Object> updateNewsVaccine(Long id, NewsVaccineDto request) {
-//        log.info("Executing update news vaccine with request: {}", request);
-//        try {
-//            Optional<NewsVaccineDao> newsVaccineDao = newsVaccineRepository.findById(id);
-//            if (newsVaccineDao.isEmpty()) {
-//                log.info("news vaccine {} not found", id);
-//                return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
-//            }
-//            newsVaccineDao.ifPresent(res -> {
-//                res.setTitleNewsVaccine(request.getTitleNewsVaccine());
-//                res.setAuthorNewsVaccine(request.getAuthorNewsVaccine());
-//                res.setContentNewsVaccine(request.getContentNewsVaccine());
-////                res.setImageNewsVaccine(request.getImageNewsVaccine());
-//                // res.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-//                newsVaccineRepository.save(res);
-//            });
-//            log.info("Executing update news vaccine success");
-//            return ResponseUtil.build(AppConstant.Message.SUCCESS,
-//                    mapper.map(newsVaccineDao, NewsVaccineDto.class), HttpStatus.OK);
-//        } catch (Exception e) {
-//            log.error("Happened error when update news vaccine. Error: {}", e.getMessage());
-//            log.trace("Get error when update news vaccine. ", e);
-//            throw e;
-//        }
-//    }
 
     public ResponseEntity<Object> deleteNewsVaccine(Long id) {
         log.info("Executing delete news vaccine id: {}", id);

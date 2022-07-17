@@ -1,9 +1,5 @@
 package com.altera.capstone.bookingvaccine.domain.dao;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +22,6 @@ import com.altera.capstone.bookingvaccine.domain.common.BaseEntity;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)

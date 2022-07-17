@@ -2,9 +2,7 @@ package com.altera.capstone.bookingvaccine.service;
 
 import com.altera.capstone.bookingvaccine.constant.AppConstant;
 import com.altera.capstone.bookingvaccine.domain.dao.AreaDao;
-import com.altera.capstone.bookingvaccine.domain.dao.CategoryFacilitiesDao;
 import com.altera.capstone.bookingvaccine.domain.dto.AreaDto;
-import com.altera.capstone.bookingvaccine.domain.dto.CategoryFacilitiesDto;
 import com.altera.capstone.bookingvaccine.repository.AreaRepository;
 import com.altera.capstone.bookingvaccine.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,23 +24,23 @@ public class AreaService {
   @Autowired
   private ModelMapper mapper;
 
-  public ResponseEntity<Object> getAllArea(){
+  public ResponseEntity<Object> getAllArea() {
     log.info("Executing get all area");
     try {
       List<AreaDao> daoList = areaRepository.findAll();
       return ResponseUtil.build(AppConstant.Message.SUCCESS, daoList, HttpStatus.OK);
-    }catch (Exception e){
+    } catch (Exception e) {
       log.error("Happened error when get all area. Error: {}", e.getMessage());
       log.trace("Get error when get all area. ", e);
       throw e;
     }
   }
 
-  public ResponseEntity<Object> getAreaById(Long id){
+  public ResponseEntity<Object> getAreaById(Long id) {
     log.info("Executing get area by id: {} ", id);
     try {
       Optional<AreaDao> areaDaoById = areaRepository.findById(id);
-      if(areaDaoById.isEmpty()) {
+      if (areaDaoById.isEmpty()) {
         log.info("area id: {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
@@ -57,7 +55,7 @@ public class AreaService {
 
   public ResponseEntity<Object> addArea(AreaDto request) {
     log.info("Executing add area with request: {}", request);
-    try{
+    try {
       AreaDao areaDaoNew = mapper.map(request, AreaDao.class);
       areaDaoNew = areaRepository.save(areaDaoNew);
       log.info("Executing add area success");
@@ -74,7 +72,7 @@ public class AreaService {
     log.info("Executing update area with request: {}", request);
     try {
       Optional<AreaDao> areaDaoUpdate = areaRepository.findById(id);
-      if(areaDaoUpdate.isEmpty()) {
+      if (areaDaoUpdate.isEmpty()) {
         log.info("area {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
@@ -93,9 +91,9 @@ public class AreaService {
 
   public ResponseEntity<Object> deleteArea(Long id) {
     log.info("Executing delete area id: {}", id);
-    try{
+    try {
       Optional<AreaDao> areaDaoDelete = areaRepository.findById(id);
-      if(areaDaoDelete.isEmpty()) {
+      if (areaDaoDelete.isEmpty()) {
         log.info("area {} not found", id);
         return ResponseUtil.build(AppConstant.Message.NOT_FOUND, null, HttpStatus.BAD_REQUEST);
       }
@@ -109,4 +107,3 @@ public class AreaService {
     }
   }
 }
-

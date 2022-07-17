@@ -24,7 +24,4 @@ public class VaccineDto {
   @ApiModelProperty(notes = "Vaccine Name", example = "Sinovac")
   private String vaccineName;
 
-//  @ApiModelProperty(notes = "Stock Vaccine", example = "100")
-//  private String stockVaccine;
-
 }

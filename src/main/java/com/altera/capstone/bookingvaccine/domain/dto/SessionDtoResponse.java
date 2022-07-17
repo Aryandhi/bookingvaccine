@@ -2,10 +2,8 @@ package com.altera.capstone.bookingvaccine.domain.dto;
 
 import com.altera.capstone.bookingvaccine.domain.dao.AreaDao;
 import com.altera.capstone.bookingvaccine.domain.dao.HealthFacilitiesDao;
-import com.altera.capstone.bookingvaccine.domain.dao.UserDao;
 import com.altera.capstone.bookingvaccine.domain.dao.VaccineDao;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,12 +12,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Builder

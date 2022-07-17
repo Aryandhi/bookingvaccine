@@ -5,7 +5,6 @@ import com.altera.capstone.bookingvaccine.constant.AppConstant;
 import com.altera.capstone.bookingvaccine.domain.payload.Login;
 import com.altera.capstone.bookingvaccine.domain.payload.TokenResponse;
 import com.altera.capstone.bookingvaccine.domain.payload.UsernamePassword;
-import com.altera.capstone.bookingvaccine.service.UserService;
 import com.altera.capstone.bookingvaccine.util.ResponseUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Api(tags = "Auth", value = "Auth")
 public class AuthController {
-    private final UserService userService;
+
     private final AuthService authService;
 
     // Register

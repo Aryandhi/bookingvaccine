@@ -1,7 +1,6 @@
 package com.altera.capstone.bookingvaccine.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,12 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Column;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -50,14 +46,6 @@ public class SessionDto {
   @ApiModelProperty(notes = "response after success upload", example = "size image")
   @Column(name = "size")
   private long size;
-
-//  @ApiModelProperty(notes = "session ended", example = "10.00")
-//  @DateTimeFormat(pattern = "HH:mm:ss")
-//  @JsonFormat(pattern = "HH:mm:ss")
-//  private LocalTime endTime;
-
-//  @ApiModelProperty(notes = "remaining vaccine stock", example = "50")
-//  private Integer lastStock;
 
   private Long idArea;
 

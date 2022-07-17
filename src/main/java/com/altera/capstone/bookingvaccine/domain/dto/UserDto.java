@@ -1,10 +1,8 @@
 package com.altera.capstone.bookingvaccine.domain.dto;
 
-import com.altera.capstone.bookingvaccine.domain.dao.FamilyDao;
-import com.altera.capstone.bookingvaccine.domain.dao.HealthFacilitiesDao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +11,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -23,12 +20,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-//implements Serializable
-public class UserDto implements Serializable{
+// implements Serializable
+public class UserDto implements Serializable {
 
   private static final long serialVersionUID = -5607905544859605735L;
 
-//  private Long idUser;
+  // private Long idUser;
 
   @ApiModelProperty(notes = "Please Insert NIK for user", example = "1871xxxxxxxxxxxx")
   private String username;
