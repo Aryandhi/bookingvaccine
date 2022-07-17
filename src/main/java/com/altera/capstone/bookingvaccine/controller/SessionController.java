@@ -36,8 +36,8 @@ public class SessionController {
   })
   @GetMapping(value = "/paging")
   public ResponseEntity<Object> getAll(
-          @RequestParam(value = "page") int page,
-          @RequestParam(value = "size") int size) {
+      @RequestParam(value = "page") int page,
+      @RequestParam(value = "size") int size) {
 
     return sessionService.getAllSessionPagination(page, size);
   }
@@ -120,6 +120,20 @@ public class SessionController {
       @RequestParam(value = "start_time") @DateTimeFormat(pattern = "HH:mm") LocalTime start_time,
       @RequestParam(value = "file", required = false) MultipartFile multipartFile) throws IOException {
     return sessionService.updateSession(id, vaccine_id, stock, start_date, start_time, multipartFile);
+  }
+
+  @ApiOperation(value = "Update session", response = SessionDto.class)
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Success Update session"),
+
+  })
+  @PutMapping(value = "/noImage/{id}")
+  public ResponseEntity<Object> updateSessionWithoutImage(@PathVariable(value = "id") Long id,
+      @RequestParam(value = "vaccine_id") Long vaccine_id,
+      @RequestParam(value = "stock") Integer stock,
+      @RequestParam(value = "start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start_date,
+      @RequestParam(value = "start_time") @DateTimeFormat(pattern = "HH:mm") LocalTime start_time) throws IOException {
+    return sessionService.updateSessionWithoutImage(id, vaccine_id, stock, start_date, start_time);
   }
 
   // DELETE
