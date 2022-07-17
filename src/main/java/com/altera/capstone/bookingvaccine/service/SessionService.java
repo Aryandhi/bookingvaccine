@@ -52,7 +52,7 @@ public class SessionService {
     log.info("Executing get all session.");
     try {
       Pageable paging = PageRequest.of(page, size,
-          Sort.by("startDate").descending().and(Sort.by("startTime").descending()));
+          Sort.by("createdAt").descending());
       Page<SessionDao> pageResult = sessionRepository.findAll(paging);
       return ResponseUtil.build(AppConstant.Message.SUCCESS, pageResult, HttpStatus.OK);
     } catch (Exception e) {
