@@ -78,15 +78,18 @@ public class UserController {
   public ResponseEntity<Object> updateBook(@PathVariable(value = "id") Long id, @RequestBody UserDto request) {
     return userService.updateUser(id, request);
   }
+  // Get All role pagination
+  @ApiOperation(value = "Pagination User", response = UserDto.class)
+  @ApiResponses(value = {
+          @ApiResponse(code = 200, message = "Success pagination user")
+  })
+  @GetMapping("/pagination/{roles}")
+  public ResponseEntity<Object> getUserByRolesPageable(
+          @PathVariable String roles,
+          @RequestParam(value = "page") int page,
+          @RequestParam(value = "size") int size) {
+    return userService.getUserByRolesPageable(roles, page, size);
+  }
 
-  // DELETE User By Id
-//  @ApiOperation(value = "Delete user",  response = UserDto.class)
-//  @ApiResponses(value = {
-//          @ApiResponse(code = 200, message = "Success delete user"),
-//  })
-//  @DeleteMapping(value = "/{id}")
-//  public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long id) {
-//    return userService.deleteUser(id);
-//  }
 
 }
