@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(Arrays.asList("https://62d7c13531db0c1d4f3250a1--vakyu.netlify.app", "http://localhost:3000", "https://vaksin-yuk.vercel.app/#/login"));
+        config.setAllowedOrigins(Arrays.asList("https://62d7c13531db0c1d4f3250a1--vakyu.netlify.app", "http://localhost:3000", "https://vaksin-yuk.vercel.app/"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
